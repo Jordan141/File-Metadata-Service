@@ -10,7 +10,6 @@ app.post('/upload', (req, res) => {
     if (!req.files)
     return res.status(400).send('No files were uploaded.')
 
-    console.log(req.files.fileUploader.data.length)
     res.send({"sizeInBytes": req.files.fileUploader.data.length})
 })
 
@@ -19,5 +18,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log('Listening. . .')
+    console.log('Server starting...')
 })
