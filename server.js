@@ -1,12 +1,10 @@
 const express = require('express')
+const fileUpload = require('express-fileupload')
 const PORT = process.env.PORT || 8000
 const app = express()
 
-app.use(__dirname + '/public')
-
-app.get('/', (req, res) => {
-    res.send('index.html')
-})
+app.use(express.static(__dirname + '/public'))
+app.use(fileUpload())
 
 app.post('/upload', (req, res) => {
     if (!req.files)
@@ -14,6 +12,10 @@ app.post('/upload', (req, res) => {
 
     console.log(req.files.fileUploader.data.length)
     res.send({"sizeInBytes": req.files.fileUploader.data.length})
+})
+
+app.get('/', (req, res) => {
+    res.send('index.html')
 })
 
 app.listen(PORT, () => {
